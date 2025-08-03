@@ -1,0 +1,122 @@
+{% include 'includes/topbar.html' %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('https://picsum.photos/1920/1080')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Hey Search</h1>
+                                           
+
+<form id="searchForm">
+  <div class="form-group">
+    <input type="text" class="form-control" id="title" name="title" placeholder="Man must explore, and this is exploration at its greatest" required>
+  </div>
+  <input type="submit" value="Search">
+</form>
+  <script>
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // prevent form submission
+    const searchText = document.getElementById('title').value.trim();
+    if (searchText) {
+      const encodedText = encodeURIComponent(searchText); // for safety in URL
+      window.location.href = `/search/${encodedText}`;
+    }
+  });
+</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7" id="main_block">
+                    {% for dataa in data %}
+
+<a href="/blog/{{dataa.url}}" class="thin-vertical-card">
+  <img src="{{dataa.bgimg}}" alt="{{dataa.title}}" 
+       onerror="this.onerror=null; this.src='/static/assets/img/noimage.png';">
+  <div class="card-body">
+    <h5 class="card-title">{{dataa.title}}</h5>
+    <p class="card-text">{{dataa.headline}}</p>
+  </div>
+</a>
+
+     
+                    {%endfor%}
+                    <!-- Pager-->
+<style>
+.thin-vertical-card {
+  width: 160px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.thin-vertical-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.thin-vertical-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.thin-vertical-card .card-body {
+  padding: 12px 10px;
+}
+
+.thin-vertical-card .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thin-vertical-card .card-text {
+  font-size: 0.82rem;
+  color: #666;
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 35px;
+}
+</style>
+                </div>
+            </div>
+        </div>
+        <style>
+            #main_block{
+                    display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+        .card{
+            margin:10px
+        }
+        </style>
+        <!-- Footer-->
+{% include 'includes/footer.html' %}
+
+
